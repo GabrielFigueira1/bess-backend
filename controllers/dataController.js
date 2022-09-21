@@ -8,9 +8,9 @@ module.exports = {
       return res.json(allData);
       },
     
-    async insertData(req, res) {
+    async insertData(req) {
       try {
-        const { ocv, corrente, soc, soh, timestamp } = req.body;
+        const { ocv, corrente, soc, soh, timestamp } = req;
         const data = await knex('info')
           .insert({
             ocv: ocv,
@@ -20,7 +20,6 @@ module.exports = {
             timestamp: parseFloat(timestamp),
           });
   
-        return res.json(data);
       } catch (error) {
         console.log(error);
       }

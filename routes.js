@@ -13,6 +13,6 @@ routes.get('/allData', dataController.readAll)
 
 routes.get('/readLast', dataController.readLast);
 
-routes.post('/insertData', dataController.insertData);
+//routes.post('/insertData', dataController.insertData);
 
 module.exports = routes;

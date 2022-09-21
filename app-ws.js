@@ -1,4 +1,6 @@
 // websockets setup
+const dataController = require('./controllers/dataController')
+
 const WebSocket = require("ws");
 var users = [];
 function onError(ws, err) {
@@ -24,9 +26,12 @@ function onMessage(ws, data) {
     if (data.includes("ocv")){ //onMessage: 3.890000;10.000000;75.429817;53363.00 //payload
         console.log("Payload received!");
         let message = JSON.parse(data);
-        message = JSON.stringify(message);
-        sendToDashboard(message);
-
+        messageStr = JSON.stringify(message);
+        sendToDashboard(messageStr);
+        
+        //write in database
+        dataController.insertData(message)
+        
         ws.send("Payload received!");
     }
     else if (data.includes("userName")){ //metadata
